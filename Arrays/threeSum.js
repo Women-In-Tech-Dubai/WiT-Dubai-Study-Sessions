@@ -19,27 +19,25 @@
  * [[-1, 0, 1],[-1,-1,2]]
  *
  *
- * [-2,0,0,2,2]
- * [-2, 0, 0, 2, 2]
+ * Given array nums = [-2,0,0,2,2]
+ * Solution set:
  * [[-2, 0, 2]]
  *
- *
- * [-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]
- *
+ * This approach involves:
+ * 1. Sorting the numbers
+ * 2. For each number, use a two-pointer approach (bi-directional) to scan the remainder of the array (p1 starts at i + 1 and p2 starts at n - 1)
+ * 3. Move the two pointers inwards based on whether the sum > target or sum < target
  */
 const threeSum = (nums) => {
     const result = [];
     nums.sort((a, b) => a - b);
     for (let i = 0; i < nums.length - 2; i++) {
-        console.log(`i: ${i} | ${nums[i]}, ${(i === 0 || (nums[i] !== nums[i - 1]))}`)
         if (i === 0 || (nums[i] !== nums[i - 1])) {
             let left = i + 1;
             let right = nums.length - 1;
-            console.log(`checking: ${nums[i]}, ${nums[left]}, ${nums[right]}`)
             while (left < right) {
                 const target = 0 - nums[i];
                 if (nums[i] + nums[left] + nums[right] === 0) {
-                    console.log(`adding: ${nums[i]}, ${nums[left]}, ${nums[right]}`)
                     result.push([nums[i], nums[left], nums[right]]);
                     while (left < right && nums[left] == nums[left + 1]) {
                         left++;
@@ -58,4 +56,4 @@ const threeSum = (nums) => {
         }
     }
     return result;
-}
+};
