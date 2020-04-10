@@ -26,9 +26,13 @@
  * Input: [1,4,0,2,3]
  * Output: true
  *
- * [12,2,10,9,5,9]
+ * Example 4:
+ * Input: [12,2,10,9,5,9]
+ * Output: true (the subsequence being [2,5,9])
  *
- * [1, 3, 0, 5]
+ * Example 5:
+ * Input: [1, 3, 0, 5]
+ * Output: true (the subsequene being [1,3,5])
  */
 
 var increasingTriplet = function (nums) {
@@ -47,4 +51,4 @@ var increasingTriplet = function (nums) {
     }
 
     return false;
-}
+};
