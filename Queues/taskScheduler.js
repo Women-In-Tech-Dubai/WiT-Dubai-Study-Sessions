@@ -47,7 +47,7 @@ var leastInterval = function (tasks, n) {
     // the most frequently occuring task is excluded by subtracting 1
     // eg. ['A', 'A', 'B', 'C'] n = 3
     // A -> __ -> __ -> __ -> A: there is a total of 3 available slots which can be assigned to other tasks/idle
-    // A -> B -> C -> idle -> A 
+    // A -> B -> C -> idle -> A
     // totalAvailableSlots = (2 - 1) * 3 = 3
     totalAvailableSlots = (mostFrequentTaskCount - 1) * n;
 

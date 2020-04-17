@@ -22,7 +22,7 @@ const rotate = (matrix) => {
     const n = matrix.length;
 
     // Transpose matrix which results in an anticlockwise rotation
-    // Important: j starts at i 
+    // Important: j starts at i
     for (let i = 0; i < n; i++) {
         for (let j = i; j < n; j++) {
             let temp = matrix[i][j];
