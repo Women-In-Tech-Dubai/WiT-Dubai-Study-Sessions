@@ -2,7 +2,9 @@
  * Strings & arrays
  * Friday, April 17th
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
- *
+ */
+
+/**
  * Say you have an array prices for which the ith element is the price of a given stock on day i.
  *
  * Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
@@ -28,21 +30,21 @@
  * Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
 
- /**
- * @param {number[]} prices
- * @return {number}
- */
-var maxProfit = function(prices) {
+/**
+* @param {number[]} prices
+* @return {number}
+*/
+var maxProfit = function (prices) {
     let maxProfit = 0;
     let i = 0;
     let valley = prices[0];
     let peak = prices[0];
     while (i < prices.length - 1) {
-        while(i < prices.length && prices[i] >= prices[i+1]) {
+        while (i < prices.length && prices[i] >= prices[i + 1]) {
             i++;
         }
         valley = prices[i];
-        while(i < prices.length && prices[i] <= prices[i+1]) {
+        while (i < prices.length && prices[i] <= prices[i + 1]) {
             i++;
         }
         peak = prices[i];

@@ -1,5 +1,10 @@
 /**
+ * Strings & arrays
+ * Friday, April 17th
  * https://leetcode.com/problems/longest-common-prefix/
+ */
+
+/**
  *
  * Write a function to find the longest common prefix string amongst an array of strings.
  *
@@ -24,21 +29,21 @@ var longestCommonPrefix = function (strs) {
     if (!strs.length) {
         return "";
     }
-    let currStr = strs[0];
-    let strFlow = "";
-    for (let i = 0; i < currStr.length; i++) {
+    let firstStr = strs[0];
+    let commonPrefix = "";
+    for (let i = 0; i < firstStr.length; i++) {
         let flag = true;
         for (let j = 0; j < strs.length; j++) {
-            if (currStr[i] !== strs[j][i]) {
+            if (firstStr[i] !== strs[j][i]) {
                 flag = false;
                 break;
             }
         }
         if (flag) {
-            strFlow += currStr[i];
+            commonPrefix += firstStr[i];
         } else {
             break;
         }
     }
-    return strFlow;
+    return commonPrefix;
 };

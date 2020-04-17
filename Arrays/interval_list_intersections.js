@@ -1,6 +1,6 @@
 /**
  * Strings & arrays
- *
+ * Friday, April 17th
  * https://leetcode.com/problems/interval-list-intersections/
  */
 
@@ -26,30 +26,30 @@
  * Reminder: The inputs and the desired output are lists of Interval objects, and not arrays or lists.
  */
 
- /**
-  * 1. Check for gaps
-  *     a. If starting point of A > ending point of B -> increment B
-  *     b. If starting point of B > ending point of A -> increment A
-  * 2. Understand how two closed intervals intersect
-  *     a. Max of starting points
-  *     b. Min of ending points
-  * 3. How to move forward in each list
-  *     a. If ending point of A <= ending point of B -> move list A forward
-  *     b. If ending points of B <= ending point of A -> move list B forward
-  */
+/**
+ * 1. Check for gaps
+ *     a. If starting point of A > ending point of B -> increment B
+ *     b. If starting point of B > ending point of A -> increment A
+ * 2. Understand how two closed intervals intersect
+ *     a. Max of starting points
+ *     b. Min of ending points
+ * 3. How to move forward in each list
+ *     a. If ending point of A <= ending point of B -> move list A forward
+ *     b. If ending points of B <= ending point of A -> move list B forward
+ */
 
 /**
  * @param {number[][]} A
  * @param {number[][]} B
  * @return {number[][]}
  */
-var intervalIntersection = function(A, B) {
+var intervalIntersection = function (A, B) {
     let indexA = 0;
     let indexB = 0;
 
     let intersections = [];
 
-    while(indexA < A.length && indexB < B.length) {
+    while (indexA < A.length && indexB < B.length) {
         if (A[indexA][0] > B[indexB][1]) {
             indexB++;
             continue;

@@ -1,7 +1,10 @@
 /**
- *
+ * Strings & arrays
+ * Friday, April 17th
  * https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/529/week-2/3299/
- *
+ */
+
+/**
  * You are given a string s containing lowercase English letters, and a matrix shift, where shift[i] = [direction, amount]:
  *  -> direction can be 0 (for left shift) or 1 (for right shift). 
  *  -> amount is the amount by which string s is to be shifted.
@@ -39,7 +42,7 @@
  * @param {number[][]} shift
  * @return {string}
  */
-var stringShift = function(s, shift) {
+var stringShift = function (s, shift) {
     let shiftedS = s;
     for (let i = 0; i < shift.length; i++) {
         switch (shift[i][0]) {
