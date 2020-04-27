@@ -39,10 +39,12 @@ var fib = function (N) {
     return fib(N-1) + fib(N-2);
 };
 
-// Memoization = storing values that have already been computed - Maria De Kewl :)
-// Big O with memoization: O(N)
+/**
+ * Memoization = storing values that have already been computed - Maria De Kewl :)
+ * Big O with memoization: O(N)
+ */
+let memo = {}; // Hash map/table to cache computations
 var fibM = function (N) {
-    let memo = {};
     if (N <= 1) {
         return N;
     }
