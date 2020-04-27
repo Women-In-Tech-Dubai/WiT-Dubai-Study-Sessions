@@ -12,14 +12,12 @@
  *
  * Note: Given n will be a positive integer.
  *
- * Example 1:
  * Input: 2
  * Output: 2
  * Explanation: There are two ways to climb to the top.
  * 1. 1 step + 1 step
  * 2. 2 steps
  *
- * Example 2:
  * Input: 3
  * Output: 3
  * Explanation: There are three ways to climb to the top.
@@ -27,31 +25,43 @@
  * 2. 1 step + 2 steps
  * 3. 2 steps + 1 step
  *
+ * Input: 4
+ * Output: 5
+ * Explanation: There are five ways to climb to the top.
+ * 1. 1 step + 1 step + 1 step + 1 step
+ * 2. 1 step + 2 steps + 1 step
+ * 3. 2 steps + 1 step + 1 step
+ * 4. 1 step + 1 step + 2 steps
+ * 5. 2 steps + 2 steps
  */
 
  // 1. Base Cases: currentStep == N, currentStep > N
- // 2. Recursive sequence
-
+ // 2. Recursive sequence: determine the total number of ways at each step
 
  /**
  * @param {number} n
  * @return {number}
  */
 var climbStairs = function(n) {
-    return climbStairsH(0, n);
+    return helper(0, n);
 };
-var climbStairsH= function(currentStep, top) {
+
+var helper = function(currentStep, top) {
     if(currentStep === top) {
         return 1;
     }
     if (currentStep > top) {
         return 0;
     }
-    return climbStairsH(currentStep + 1, top) + climbStairsH(currentStep + 2, top);
+    return helper(currentStep + 1, top) + helper(currentStep + 2, top);
 }
 
 console.log(climbStairs(5))
 
+/**
+ * Intuition: the sequence for the number of ways resembles the fibonacci sequences
+ * @param {number} N 
+ */
 var climbStairsIterative = function (N) {
     var memo = [];
     memo[0] = 0;
