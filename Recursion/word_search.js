@@ -29,5 +29,6 @@
  * @return {boolean}
  */
 var exist = function(board, word) {
-
+    //base case: end of string / out boundary of array / strings don't match
+    //recursive: call for every direction around each cell and replace cells with 0 once traversed
 };
