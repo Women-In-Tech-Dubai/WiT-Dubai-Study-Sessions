@@ -47,10 +47,10 @@ var isPalindrome = function(s) {
 function helper(string, i, j) {
     if (i >= j) {
         return true;
-    } 
+    }
     if (string[i] !== string[j]) {
         return false;
-    } 
+    }
     return helper(string, i+1, j-1)
 }
 
