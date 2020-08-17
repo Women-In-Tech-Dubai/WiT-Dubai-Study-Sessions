@@ -13,7 +13,7 @@
  * Output: false
  *
  * Example 2:
- * Input: "rotbr"
+ * Input: "rotor"
  * Output: true
  *
  *

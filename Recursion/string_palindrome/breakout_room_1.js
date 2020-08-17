@@ -26,10 +26,8 @@
  * @return {boolean}
  */
 
- // base case -  or if the letters dont match
- // recursive sequence - all helper() with the smaller string
- // helper
-
+ // base case -  there is zero or one character left or if the letters dont match
+ // recursive sequence - call helper() with the smaller string
 
 var isPalindrome = function(s) {
 
