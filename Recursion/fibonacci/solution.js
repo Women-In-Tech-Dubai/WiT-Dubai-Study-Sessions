@@ -29,6 +29,44 @@
 * @param {number} :)
 * @return {number}
 */
-
+// 0 1 1 2 3 5 ...
+// Big O (2^n)
 var fib = function (N) {
+    if (N < 2) {
+        return N;
+    }
+    return fib(N - 1) + fib(N - 2);
 };
+
+// Method 1: Memoization
+// Big O(N)
+var memo = [];
+var fibMemo = function (N) {
+    if (N < 2) {
+        return N;
+    }
+    if (memo[N]) {
+        return memo[N];
+    }
+
+    memo[N] = fib(N - 1) + fib(N - 2);
+    return memo[N];
+};
+
+// Method 2: Tabulation
+// Big O(N)
+var fibTabulation = function (N) {
+    var dp = new Array(N);
+    dp[0] = 0;
+    dp[1] = 1;
+
+    for (let i = 2; i <= N; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    return dp[N];
+};
+
+// console.log(fib(99999));
+console.log(fibMemo(99999));
+// console.log(fibTabulation(99999));
