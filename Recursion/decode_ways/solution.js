@@ -1,3 +1,41 @@
+/**
+ * Recursion
+ * Sunday, August 16th
+ * https://leetcode.com/problems/decode-ways/
+ */
+
+/**
+ * Decode Ways
+ *
+ * A message containing letters from A-Z is being encoded to numbers using the following mapping:
+ *
+ * 'A' -> 1
+ * 'B' -> 2
+ * ...
+ * 'Z' -> 26
+ *
+ * Given a non-empty string containing only digits, determine the total number of ways to decode it.
+ * Input: "12"
+ * Output: 2
+ * Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+ *
+ * Example 2:
+ * Input: "226"
+ * Output: 3
+ * Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+ *
+ *
+ */
+// "220"
+// 1. 2 2 0 => B B
+// 2. 22 0 => Q
+// 3. 2   20  => B Q
+
+// Special cases: 
+// "0"
+// "022" 
+
+/*
 
 /**
  * @param {string} s
@@ -108,4 +146,4 @@ var numDecodingsTabulation = function (s) {
     return dp[s.length];
 };
 
-console.log(numDecodingsTabulation("1234"));
+console.log(numDecodingsTabulation("123456"));
