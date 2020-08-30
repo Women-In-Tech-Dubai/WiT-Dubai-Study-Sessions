@@ -24,10 +24,6 @@
  * @param {string} s
  * @return {boolean}
  */
-// Base cases:
-// str.length == 0
-// Recursive relation:
-// reverse()
 var isPalindrome = function(s) {
     if (s.length == 0) {
         return false;
@@ -39,11 +35,13 @@ var isPalindrome = function(s) {
     return helper(s, 0, s.length - 1)
 };
 
-// abba
-// abcba
+// Base cases:
+// - Pointers have met and/or crossed each other: i >= j
+// - Char at i and char at j do not match
 
-// "abcba", 0, 4
-// O(n/2) => O(n)
+// Recursive relation:
+// - Call recursive function with modified pointers
+// Time complexity: O(n/2) => O(n)
 function helper(string, i, j) {
     if (i >= j) {
         return true;
