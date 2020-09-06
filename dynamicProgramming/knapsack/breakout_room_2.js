@@ -27,7 +27,46 @@
  *
 */
 
-
+// Tabulation
+// Formula: dp[i][c] = max (dp[i-1][c], profits[i] + dp[i-1][c-weights[i]])
 let solveKnapsack = function (profits, weights, capacity) {
+   if (!profits.length || !weights.length || capacity <= 0) {
+      return 0;
+   }
 
+   /**
+    * [
+    *    [0, 0, 0, 0, 0, 0],
+    *    [0, 0, 0, 0, 0, 0],
+    *    [0, 0, 0, 0, 0, 0],
+    *    [0, 0, 0, 0, 0, 0]
+    * ]
+    */
+   let dp = Array(profits.length).fill(0).map(() => Array(capacity + 1).fill(0));
+
+   // pre-populate the first row with the profit of the (only) item we have, as long as it's within capacity
+   for(let c = 0; c <= capacity; c++) {
+      if (weights[0] <= c) {
+         dp[0][c] = profits[0];
+      }
+   }
+
+   // O(N * C)
+   for(let i = 1; i < profits.length; i++) {
+      for(let c = 1; c <= capacity; c++) {
+         let profitIncludingItem = 0;
+         if (weights[i] <= c) {
+            profitIncludingItem = profits[i] + dp[i-1][c-weights[i]];
+         }
+         let profitExcludingItem = dp[i-1][c];
+         dp[i][c] = Math.max(profitIncludingItem, profitExcludingItem);
+      }
+   }
+   console.log(dp);
+
+   return dp[profits.length-1][capacity];
 }
+
+const profits = [4, 5, 3, 7];
+const weights = [2, 3, 1, 4];
+console.log(solveKnapsack(profits, weights, 5));

@@ -9,7 +9,7 @@
  * find if we can partition it into two subsets such that the sum of elements in both the subsets is equal.
  *
  * Example:
- * Input: {1, 2, 3, 4}
+ * Input: {1, 2, 3, 4} => S/2 => 5
  * Output: true
  * The given set can be partitioned into two subsets with equal sum: {1, 4} & {2, 3}
  *

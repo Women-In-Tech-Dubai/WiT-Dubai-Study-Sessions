@@ -15,7 +15,7 @@
     * Weights: { 2, 3, 1, 4 }
     * Profits: { 4, 5, 3, 7 }
     * Capacity: 5
- * Output: Banana & Melon
+ * Output: 10 (Banana & Melon)
  *
  * Explanation:
     * Let’s try to put different combinations of fruits in the knapsack, such that their total weight is not more than 5:
@@ -27,7 +27,53 @@
  *
 */
 
+// Validation checks
+// 1. profits.length
+// 2. weights.length
 
-let solveKnapsack = function (profits, weights, capacity) {
+// Base cases:
+// 1. currentIndex > profits.length
+// 2. exceed capacity: capacity <= 0
 
+// Recursive sequence/Recurrence relation
+// 1. profitIncludingCurrentItem -> helper(profits, weights, currentIndex, capacity - weights[i])
+// 2. profitExcludingCurrentItem -> helper(profits, weights, currentIndex, capacity)
+let solveKnapsackRecursion = function (profits, weights, capacity) {
+   if (!profits.length || !weights.length) {
+      return 0;
+   }
+
+   const memo = [];
+
+   return helper(profits, weights, 0, capacity, memo);
 }
+
+let helper = function (profits, weights, currentIndex, capacity, memo) {
+
+   // base cases
+   if (currentIndex >= profits.length || capacity <= 0) {
+      return 0;
+   }
+
+   memo[currentIndex] = memo[currentIndex] ? memo[currentIndex] : [];
+
+   if (memo[currentIndex][capacity]) {
+      return memo[currentIndex][capacity];
+   }
+
+   // recurrence relation
+   let profitIncludingCurrentItem = 0;
+   if (weights[currentIndex] <= capacity) {
+      profitIncludingCurrentItem = profits[currentIndex] + helper(profits, weights, currentIndex + 1, capacity - weights[currentIndex], memo);
+   }
+
+   let profitExcludingCurrentItem = helper(profits, weights, currentIndex + 1, capacity, memo);
+
+   memo[currentIndex][capacity] = Math.max(profitIncludingCurrentItem, profitExcludingCurrentItem);
+   return memo[currentIndex][capacity];
+}
+
+const profits = [4, 5, 3, 7];
+const weights = [2, 3, 1, 4];
+
+console.log(solveKnapsackRecursion(profits, weights, 5));
