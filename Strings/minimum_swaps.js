@@ -59,7 +59,7 @@ s1, s2 only contain 'x' or 'y'.
  * @param {string} s2
  * @return {number}
  */
- var minimumSwap = function(s1, s2) {
+var minimumSwap = function(s1, s2) {
     if (s1.length !== s2.length) {
         return -1;
     }

@@ -51,7 +51,7 @@ Constraints:
  * @param {number} limit
  * @return {number}
  */
- var numRescueBoats = function(people, limit) {
+var numRescueBoats = function(people, limit) {
     let sortedPeople = people.sort((a, b) => b - a);
     let numberOfBoats = 0;
 
