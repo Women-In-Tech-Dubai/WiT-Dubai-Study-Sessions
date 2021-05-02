@@ -34,5 +34,17 @@ n == grid.length
 n == grid[i].length
 1 <= n <= 100
 grid[i][j] is 0 or 1
-
 */
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+/*
+1. Push all land cells to queue
+2. While queue is not empty
+2a. Dequeue land cell and initiate BFS
+2b. For each neighbor of land cell: calculate distance using manhattan formula, if not visited => set distance, if visited calculatedDistance < currentDistance, set currentDistance = calculatedDistance, if calculatedDistance > maxDistance, set maxDistance
+*/
+ var maxDistance = function(grid) {
+    
+};
