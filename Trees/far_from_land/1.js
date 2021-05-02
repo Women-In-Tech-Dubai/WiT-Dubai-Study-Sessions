@@ -44,7 +44,53 @@ grid[i][j] is 0 or 1
 2. While queue is not empty
 2a. Dequeue land cell and initiate BFS
 2b. For each neighbor of land cell: calculate distance using manhattan formula, if not visited => set distance, if visited calculatedDistance < currentDistance, set currentDistance = calculatedDistance, if calculatedDistance > maxDistance, set maxDistance
+2c. Queue unvisited neighbours
 */
- var maxDistance = function(grid) {
-    
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var maxDistance = function (grid) {
+    let queue = [];
+    let visited = JSON.parse(JSON.stringify(grid));
+    let size = grid.length;
+    let maxDistance = 0;
+
+    // Track all land cells
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[0].length; j++) {
+            if (grid[i][j] === 1) {
+                queue.push([i, j, 0]);
+            }
+        }
+    }
+
+    // Verify that there is at least some water and land cells
+    if (!queue.length || queue.length == size * size) {
+        return -1;
+    }
+
+    while (queue.length) {
+        let cell = queue.shift();
+        let x = cell[0];
+        let y = cell[1];
+        let d = cell[2];
+
+        if (d > maxDistance) {
+            maxDistance = d;
+        }
+
+        // Track all neighbors and increment distance
+        let neighbors = [[x - 1, y, d + 1], [x, y + 1, d + 1], [x + 1, y, d + 1], [x, y - 1, d + 1]];
+
+        for (let neighbor of neighbors) {
+            // Queue unvisited neighbors that are within bounds
+            if (neighbor[0] >= 0 && neighbor[0] < size && neighbor[1] >= 0 && neighbor[1] < size && visited[neighbor[0]][neighbor[1]] != -1) {
+                visited[neighbor[0]][neighbor[1]] = -1;
+                queue.push(neighbor);
+            }
+        }
+    }
+
+    return maxDistance;
 };
