@@ -39,7 +39,7 @@
  * @param {number[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
- var gameOfLife = function(board) {
+var gameOfLife = function(board) {
     // track rows, columns
     let rows = board.length;
     let cols = board[0].length;
