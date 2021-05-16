@@ -31,10 +31,53 @@ The maximum number of employees won't exceed 2000.
  */
 
 /**
+ * 
+ * [[1, 5, [2]], [2, 3, [3]], [3, 3, []]], 1
+ * 
+ * 1. Find the employee
+ * 2. Add importance to total
+ * 3. Iterate through subordinates
+ * 4. Return total importance
+ */
+
+ function Employee(id, importance, subordinates) {
+    this.id = id;
+    this.importance = importance;
+    this.subordinates = subordinates;
+}
+/**
  * @param {Employee[]} employees
  * @param {number} id
  * @return {number}
  */
 var GetImportance = function(employees, id) {
 
+    const findEmployee = (id) => {
+        for (let employee of employees) {
+            if (employee.id === id) {
+                return employee;
+            }
+        }
+    }
+
+    const calculate = (employee) => {
+        let importanceTotal = employee.importance;
+        if (!employee.subordinates) {
+            return importanceTotal;
+        }
+        for (let subordinate of employee.subordinates) {
+            importanceTotal += calculate(findEmployee(subordinate));
+        }
+        return importanceTotal;
+    }
+
+
+    for (let employee of employees) {
+        if (employee.id === id) {
+            return calculate(employee);
+        }
+    }
+    return 0;
 };
+
+
