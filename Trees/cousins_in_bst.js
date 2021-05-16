@@ -71,6 +71,10 @@ var isCousins = function(root, x, y) {
         if (node[0].val == y) {
             yNode = node;
         }
+        // Found both nodes, no need to traverse the tree further
+        if (xNode && yNode) {
+            break;
+        }
         // Process each child i.e left and right nodes (if they exist)
         if (node[0].left) {
             queue.push([node[0].left, level+1, node[0]]);
