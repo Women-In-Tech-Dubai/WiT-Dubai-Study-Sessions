@@ -29,5 +29,31 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function(root) {
-    
+    let queue = [];
+    let maxDiameter = 0;
+    queue.push(root);
+
+    while (queue.length != 0) {
+         console.log(queue.length)
+         let node = queue.unshift();
+         let diameter = calculateDepth(node.left) + calculateDepth(node.right);
+         if (diameter > maxDiameter) {
+              maxDiameter = diameter;
+         }
+         if (node.left) {
+              queue.push(node.left);
+         }
+         if (node.right) {
+              queue.push(node.right);
+         }
+    }
+    return maxDiameter;
 };
+
+const calculateDepth = (node) => {
+     if (!node) {
+          return 0;
+     }
+     let height = 1 + Math.max(calculateDepth(node.left), calculateDepth(node.right));
+     return height;
+}
