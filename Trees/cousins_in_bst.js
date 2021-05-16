@@ -38,11 +38,47 @@ Each node has a unique integer value from 1 to 100.
  * }
  */
 /**
+ * 1. Let queue = [], xNode = null, yNode = null
+ * 2. Push root onto queue => [value, level, parent] => [root.value, 0, null]
+ * 3. While (!queue.empty())
+ * 3a. Dequeue node => level
+ * 3b. if (node.value == x) { set xNode = node }
+ * 3b. if (node.value == y) { set yNode = node }
+ * 3c. Process each child (node.left and node.right) => push child onto queue => [child.value, level+1, node]
+ * 4. return xNode.level == yNode.level && xNode.parent != yNode.parent
+ */
+/**
  * @param {TreeNode} root
  * @param {number} x
  * @param {number} y
  * @return {boolean}
  */
 var isCousins = function(root, x, y) {
+    let queue = [];
+    let xNode = null;
+    let yNode = null;
 
+    // Push node onto queue in the format: [node, level, parent]
+    queue.push([root, 0, null]);
+
+    while (queue.length) {
+        // Dequeue node and retrieve it's level
+        let node = queue.shift(queue);
+        let level = node[1];
+        if (node[0].val == x) {
+            xNode = node;
+        }
+        if (node[0].val == y) {
+            yNode = node;
+        }
+        // Process each child i.e left and right nodes (if they exist)
+        if (node[0].left) {
+            queue.push([node[0].left, level+1, node[0]]);
+        }
+        if (node[0].right) {
+            queue.push([node[0].right, level+1, node[0]]);
+        }
+    }
+    // Return whether x and y are on the same level AND have different parents
+    return xNode[1] == yNode[1] && xNode[2] != yNode[2];
 };
