@@ -56,24 +56,26 @@ function Node (val, connections) {
     this.visited = false;
 }
 
-1.5 add connection
 2. For 0 to n
 2a. Check if node 0 connections: mark as visited, add 1 to totalMaintenanceCost
-2b. Check if node has 1 or more connections (and check if connection has not been visited before): count connections => add ceil(sqrt(connections+1)) to totalMaintenanceCost
+2b. Check if node has not been visited and has 1 or more connections: count all connected nodes => add ceil(sqrt(connections+1)) to totalMaintenanceCost
 3. Return totalMaintenanceCost
 
 */
 
-function Node (val, connections) {
-    this.value = val;
-    this.connections = connections;
-    this.visited = false;
+class Node {
+    constructor(val, connections) {
+        this.value = val;
+        this.connections = connections;
+        this.visited = false;
+    }
 }
 
-function connectionFinder(n, connections) {
+// Returns an array of the nodes connected directly to n
+function getDirectConnectedNodes(n, connections) {
     let edges = [];
     connections.map((connection) => {
-        if(n === connection[0]){
+        if (n === connection[0]) {
             edges.push(connection[1]);
         }
         if (n === connection[1]) {
@@ -83,12 +85,18 @@ function connectionFinder(n, connections) {
     return edges;
 }
 
-const countConnectedNode = (node, graph, count) => {
-    if (!node.visited) {
-        node.visited = true;
-        node.connections.forEach((connection)  => {
-            count = countConnectedNode(graph[connection], graph, count + 1);
-        })
+// Count all nodes that are directly and indirectly connected
+const countConnectedNodes = (node, graph) => {
+    if (node.visited) {
+        return 0;
+    }
+    node.visited = true;
+    if (node.connections.length == 0) {
+        return 0;
+    }
+    let count = 1;
+    for (let i = 0; i < node.connections.length; i++) {
+        count += countConnectedNodes(graph[node.connections[i]], graph);
     }
     return count;
 }
@@ -96,23 +104,28 @@ const countConnectedNode = (node, graph, count) => {
 const costEvaluation = (n, connections) => {
     let graph = [];
     let totalMaintenanceCost = 0;
-    for(let i = 0; i < n; i++) {
+
+    // Generate the graph with each node's connections i.e. edges
+    for (let i = 0; i < n; i++) {
         let connectedNode = new Node(i, []);
-        connectedNode.connections = connectionFinder(i, connections);
+        connectedNode.connections = getDirectConnectedNodes(i, connections);
         graph.push(connectedNode)
     }
     console.log(JSON.stringify(graph));
 
-    for(let i =0; i < graph.length; i++) {
-        if(!graph[i].visited && graph[i].connections.length === 0) {
+    // For each node:
+    // - If the node is a not connected to any others, increment total cost by 1
+    // - If the node has connections, count all directly and indirectly connected nodes and increment cost by the formula ceil(sqrt(count of nodes)) 
+    for (let i = 0; i < graph.length; i++) {
+        if (!graph[i].visited && graph[i].connections.length === 0) {
             graph[i].visited = true;
-            totalMaintenanceCost++;
-        } else if(!graph[i].visited && graph[i].connections.length > 0) {
-            totalMaintenanceCost += Math.ceil(Math.sqrt(countConnectedNode(graph[i], graph, 0)));
-            console.log("total", totalMaintenanceCost);
+            totalMaintenanceCost += 1;
+        } else if (!graph[i].visited && graph[i].connections.length > 0) {
+            totalMaintenanceCost += Math.ceil(Math.sqrt(countConnectedNodes(graph[i], graph)));
         }
     }
     return totalMaintenanceCost;
 }
 
 console.log(costEvaluation(10, [[2, 6], [3, 5], [0, 1], [2, 9], [5, 6]]));
+console.log(costEvaluation(4, [[1, 0], [0, 1]]));
