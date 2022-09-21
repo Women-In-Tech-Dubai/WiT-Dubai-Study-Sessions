@@ -11,19 +11,7 @@
  *     this.left = (left===undefined ? null : left)
  *     this.right = (right===undefined ? null : right)
  * }
- * 
- * 
- * start at root
- * add left to root
- * 
- *if root + left < k then 
- *  add right to root
- * 
- * 
- * 
- * 
  */
-
 function TreeNode(val, left, right) {
     this.val = (val === undefined ? 0 : val)
     this.left = (left === undefined ? null : left)
@@ -35,21 +23,20 @@ function TreeNode(val, left, right) {
  * @param {number} k
  * @return {boolean}
  */
- var findTarget = function(root, k) {
+var findTarget = function (root, k) {
+    let seen = new Set();
+    var dfs = function (node, target) {
+        if (!node) {
+            return false;
+        }
+        if (seen.has(target - node.val)) {
+            return true;
+        }
+        seen.add(node.val);
+        return dfs(node.left, target) || dfs(node.right, target);
+    }
     return dfs(root, k);
 };
-
-let seen = new Set();
-var dfs = function(node, target) {
-    if (!node) {
-        return false;
-    }
-    if (seen.has(target - node.val)) {
-        return true;
-    }
-    seen.add(node.val);
-    return dfs(node.left, target) || dfs(node.right, target);
-}
 
 // Tests!
 const a = new TreeNode(5);
@@ -66,9 +53,9 @@ b.right = e;
 c.left = f;
 c.right = null;
 
-console.log(findTarget(a, 9));
-console.log(findTarget(a, 10));
-console.log(findTarget(a, 20));
+console.log(findTarget(a, 9)); // Expected: true
+console.log(findTarget(a, 10)); // Expected: true
+console.log(findTarget(a, 20)); // Expected: false
 
 const g = new TreeNode(1);
-console.log(findTarget(g, 2));
+console.log(findTarget(g, 2)); // Expected: false
