@@ -4,6 +4,7 @@ Insertion Sort and the simple version of Quicksort are stable, but the faster in
 
 Design your counting sort to be stable.
 
+HIIIIIII
 Example
 
 The first two strings are replaced with '-'. Since the maximum associated integer is , set up a helper array with at least two empty arrays as elements. The following shows the insertions into an array of three empty arrays.
@@ -31,23 +32,22 @@ function countSort(arr) {
     // create our frequency array
     // loop through input and push into the frequency array
     // print out from frequency array
-    
-     for (let i =0; i < arr.length/2; i++){
+
+    for (let i = 0; i < arr.length / 2; i++) {
         arr[i][1] = '-'
-    } 
-    
+    }
+
     let freqArray = [];
-    for(let i =0; i< 100; i++){
+    for (let i = 0; i < 100; i++) {
         freqArray[i] = [];
     }
-    
-    for (let j =0; j< arr.length; j++){
+
+    for (let j = 0; j < arr.length; j++) {
         freqArray[arr[j][0]].push(arr[j][1]);
     }
-    
+
     console.log(freqArray);
     console.log(freqArray.flat());
     console.log(freqArray.flat().join(' '));
-    
-    }
-    
+
+}
