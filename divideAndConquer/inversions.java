@@ -7,16 +7,8 @@ public class Inversions {
 
     // Return a permutation of length n with exactly k inversions.
     public static int[] generate(int n, long k) {
-        int[] perm0 = new int[n];
+        
         int[] perm = new int[n];
-
-        // If n or k are 0
-        for (int i = 0; i < n; i++) {
-            perm0[i] = i;
-        }
-
-        if (n == 0 || k == 0) return perm0;
-
 
         for (int i = 0; i < n; i++) {
 
